@@ -64,6 +64,8 @@ dependencies {
     //Misc
     implementation(libs.androidx.core.splashscreen) //Splash screen
     implementation(libs.kotlinx.serialization.json) //Serialization
+    implementation(libs.accompanist.swiperefresh) //Swipe refresh
+    implementation(libs.material3) //Material3
 
     //Coil
     implementation(libs.coil.compose)
