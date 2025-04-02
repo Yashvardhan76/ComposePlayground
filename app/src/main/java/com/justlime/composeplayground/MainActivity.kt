@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavSetup(paddingValues: PaddingValues) {
     val navController = rememberNavController()
-    NavHost(navController, "home") {
+    NavHost(navController, "Quotes Screen") {
         composable("home") {
             HomeScreen(navController, paddingValues)
         }

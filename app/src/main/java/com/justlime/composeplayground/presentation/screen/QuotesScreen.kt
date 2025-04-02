@@ -16,7 +16,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -40,14 +42,14 @@ fun QuoteScreen(
 ) {
     val quotes = viewModel.pager.collectAsLazyPagingItems()
     val refreshScope = rememberCoroutineScope()
-    val isRefreshing = quotes.loadState.refresh is LoadState.Loading
+    val isFirstTimeLoad = rememberSaveable { mutableStateOf(true) }
+    val isRefreshing = quotes.loadState.refresh is LoadState.Loading && !isFirstTimeLoad.value
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
     ) {
-//        val count = rememberSaveable { mutableIntStateOf(1) }
         Spacer(modifier = Modifier.height(12.dp))
 
         Row(
@@ -91,6 +93,7 @@ fun QuoteScreen(
                             }
                         }
                     } else {
+                        isFirstTimeLoad.value = false
                         items(quotes.itemCount) { index ->
                             QuoteCard(quote = quotes[index]!!)
                         }

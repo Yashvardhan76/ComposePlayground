@@ -24,8 +24,4 @@ class QuotesViewModel @Inject constructor(
         QuotesPagingSource(api, 10)
     }.flow.cachedIn(viewModelScope)
 
-    // Loading state
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading
-
 }
